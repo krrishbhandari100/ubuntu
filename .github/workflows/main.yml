@@ -1,0 +1,31 @@
+name: RDP Tunnel
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04  # Specify Ubuntu 20.04 as the runner
+
+    steps:
+      - name: Set up ngrok
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip
+          wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -O ngrok.zip
+          unzip ./ngrok.zip
+          ls
+          pwd
+          chmod +x ./ngrok
+          echo $USER
+
+      - name: Set up ngrok tunnel
+        run: |
+          pwd
+          cd /home/runner/work/ubuntu/ubuntu
+          pwd
+          ./ngrok authtoken "1rheATt20XeqoAAY70DYLbAghY0_4pDjj3jdHNCsmvtBkzFkh"
+          sudo apt install ubuntu-desktop
+          sudo apt install xrdp -y
+          sudo service xrdp start
+          echo "$USER:krrish" | sudo chpasswd
+          ./ngrok tcp 3389

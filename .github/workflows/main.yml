@@ -4,7 +4,7 @@ on: [push, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: ubuntu-20.04  # Specify Ubuntu 20.04 as the runner
+    runs-on: ubuntu-latest
 
     steps:
       - name: Set up ngrok
